@@ -47,24 +47,26 @@ Coin Counter using Hough Transforms and Neural Networks. Counts total coin value
     (.venv) $ pip install tensorflow
     ```
 
-6. [SCRIPTS] Gather Data for Training and Testing in /train_data/ and /test_data/ folders:
+## Use
+
+1. Gather Data for Training and Testing in /train_data/ and /test_data/ folders:
 
     ```bash
     (.venv) $ poetry run gather
     ```
-7. [SCRIPTS] Create Neural Network Model and save in /models/ folder:
+2. Create Neural Network Model and save in /models/ folder:
 
     ```bash
     (.venv) $ poetry run create
     ```
 
-8. [SCRIPTS] Train Network until a target is reached (Press Crtl + C to Exit):
+3. Train Network until a target is reached (Press Crtl + C to Exit):
 
     ```bash
     (.venv) $ poetry run train
     ```
 
-9. [SCRIPTS] Use Network to predict worth of coins:
+4. Use Network to predict worth of coins:
 
     ```bash
     (.venv) $ poetry run counter
