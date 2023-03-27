@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "coin-counter"
+version = "0.1.0"
+description = ""
+authors = ["Peyton Anderson <peyanders@gmail.com>"]
+readme = "README.md"
+packages = [{include = "neural_network"}]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.11"
+pygame = "^2.3.0"
+opencv-python = "^4.7.0.72"
+
+[tool.poetry.scripts]
+counter = "scripts.d_predict_model:main"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
