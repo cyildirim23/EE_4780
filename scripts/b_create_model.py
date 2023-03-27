@@ -50,7 +50,6 @@ def main():
     for d in dir_array:
         if d != dir_array[0]:
             current_d = current_d + "/" + d
-            print(current_d)
             if os.path.isdir(current_d) is False:
                 os.mkdir(current_d)
 

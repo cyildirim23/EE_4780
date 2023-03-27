@@ -92,7 +92,6 @@ def main():
 
     #Get Names
     coin_types_array = get_coin_names(TRAIN_DIR, COIN_TYPES)
-    print(coin_types_array)
 
     #Calculate Total Value
     def calc_total_value(coin_str_list: list, coin_types: list, coin_values: list):
