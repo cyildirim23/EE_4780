@@ -12,6 +12,9 @@ pygame = "^2.3.0"
 opencv-python = "^4.7.0.72"
 
 [tool.poetry.scripts]
+gather = "scripts.a_create_data:main"
+create = "scripts.b_create_model:main"
+train = "scripts.c_train_model:main"
 counter = "scripts.d_predict_model:main"
 
 

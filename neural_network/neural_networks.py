@@ -1,5 +1,4 @@
 import tensorflow as tf
-import matplotlib.pyplot as plt
 import numpy as np
 import os
 
@@ -65,10 +64,13 @@ def get_output_number(dir: str, coin_names: list[str]):
     outputs = 0
     for string in coin_names:
         d = dir + "/" + string
-        dir_length = len(os.listdir(d))
-        print(f"Checking {d} ... Length: {dir_length}")
-        if dir_length is not None and dir_length != 0:
-            outputs += 1
+        if os.path.isdir(d) is True:
+            dir_length = len(os.listdir(d))
+            print(f"Checking {d} ... Length: {dir_length}")
+            if dir_length is not None and dir_length != 0:
+                outputs += 1
+        else:
+            print(f"Checking {d} ... NOT FOUND!")
     return outputs
 
 def get_number_from_name(coin_name: str, coin_names_array: list[str]) -> int | None:
@@ -111,12 +113,12 @@ def get_coin_names(dir: str, coin_names: list[str]):
     for name in coin_names:
         #Get dir and its length
         d = dir + "/" + name
-        d_length = len(os.listdir(d))
-
-        #See if dir is empty
-        if d_length is not None and d_length != 0:
-            #Add coin type to array
-            coin_types_array.append(name)
+        if os.path.isdir(d):
+            d_length = len(os.listdir(d))
+            #See if dir is empty
+            if d_length is not None and d_length != 0:
+                #Add coin type to array
+                coin_types_array.append(name)
     return coin_types_array
 
 
