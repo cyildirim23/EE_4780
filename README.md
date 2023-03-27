@@ -1,5 +1,5 @@
 # Coin Counter
-Coin Counter using Hough Transforms and Neural Networks. Counts Coins from a live video feed.
+Coin Counter using Hough Transforms and Neural Networks. Counts total coin value of coins from a live video feed.
 
 ## Installation
 
@@ -17,8 +17,7 @@ Coin Counter using Hough Transforms and Neural Networks. Counts Coins from a liv
 3. Clone the repositories using git. Make sure to check out the develop branch of both repositories to get the most recent changes.
 
     ```bash
-    $ git clone https://github.com/lsu-ece/pecs.git
-    $ git clone https://github.com/lsu-ece/mad-macs.git
+    $ git clone https://github.com/cyildirim23/EE_4780.git
     ```
 
 3. Create/Activate a Python Virtual Environment while inside the directory.
