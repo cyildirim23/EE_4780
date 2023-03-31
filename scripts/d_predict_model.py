@@ -166,6 +166,7 @@ def main():
                                         minRadius=MINRADIUS, 
                                         maxRadius=MAXRADIUS
             )
+            circles = cv_filter_circles(circles)
 
             #Get Circle Images
             coin_circles, coin_images_nd, coin_images_py = cv_create_circle_images(gray_img, 
