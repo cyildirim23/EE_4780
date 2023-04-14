@@ -4,7 +4,12 @@ import os
 
 from neural_network.image_processing import cv_image_to_gray, cv_load_image
 
-def network_create(outputs: int = 10, hidden_layers: int = 2, neurons: int = 128, 
+def network_create(outputs: int = 10,
+        input_shape: tuple = (128, 128),
+        hidden_layers: int = 2, 
+        neurons: int = 128,
+        conv_size: int = None,
+        conv_depth: int = None,
         activation_function_hidden = tf.nn.relu,
         activation_function_output = tf.nn.softmax,
         optimizer_algo = 'adam',
@@ -14,11 +19,26 @@ def network_create(outputs: int = 10, hidden_layers: int = 2, neurons: int = 128
     #Create Sequential Neural Network
     model = tf.keras.models.Sequential()
 
-    #Input Layer to Neural Network. Flatten 2D array.
-    model.add(tf.keras.layers.Flatten())
+    #Input Layer to Neural Network.
+    model.add(tf.keras.layers.Input(shape=input_shape))
+    
+    if conv_size is None:
 
-    #Hidden Layer. Dense Layer with 128 neurons. Use relu activation function
-    for _ in range(hidden_layers):
+        #Flatten Layer for Dense Layer
+        model.add(tf.keras.layers.Flatten())
+
+        #Dense Layer with neurons. Use relu activation function
+        for _ in range(hidden_layers):
+            model.add(tf.keras.layers.Dense(neurons, activation=activation_function_hidden))
+    else:
+        #Convolution2D layer.
+        for _ in range(conv_depth):
+            model.add(tf.keras.layers.Conv1D(filters=conv_size, kernel_size=3, padding='same', activation='relu'))
+
+        #Flatten Layer for Dens Layer
+        model.add(tf.keras.layers.Flatten())
+
+        #Dense Layer with neurons. Use relu activation function
         model.add(tf.keras.layers.Dense(neurons, activation=activation_function_hidden))
 
     #Output Layer. Also Dense Layer. 10 ouputs (Decimal Numbers)
@@ -32,7 +52,10 @@ def network_create(outputs: int = 10, hidden_layers: int = 2, neurons: int = 128
 
 def network_train(model, train_x, train_y, epochs: int = 3) -> tf.keras.models.Sequential:
     #Train Model
-    model.fit(train_x, train_y, epochs=epochs)
+    model.fit(train_x, train_y, epochs=epochs, verbose=1, batch_size=20, validation_split=0.1, callbacks=[
+        tf.keras.callbacks.ReduceLROnPlateau(monitor='loss', patience=10),
+        tf.keras.callbacks.EarlyStopping(monitor='loss', patience=15)
+    ])
     return model
 
 def network_test(model, test_x, test_y) -> tf.keras.models.Sequential:
