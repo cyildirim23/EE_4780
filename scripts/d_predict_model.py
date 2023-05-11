@@ -166,6 +166,7 @@ def main():
                                         minRadius=MINRADIUS, 
                                         maxRadius=MAXRADIUS
             )
+            circles = cv_filter_circles(circles)
 
             #Filter Circles
             if circles is not None:
