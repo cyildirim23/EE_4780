@@ -3,8 +3,10 @@ import tensorflow as tf
 import os
 
 #Neural Network Constants
-HIDDEN_LAYERS = 6
+HIDDEN_LAYERS = 1
 NEURONS = 1024
+CONV_SIZE = 32
+CONV_DEPTH = 4
 ACTIVATION_FUNCTION_HIDDEN_LAYER = tf.nn.relu
 ACTIVATION_FUNCTION_OUTPUT_LAYER = tf.nn.softmax
 OPTIMIZER_ALGORITHM = 'adam'
@@ -35,6 +37,8 @@ def main():
     model = network_create(outputs=outputs, 
                             hidden_layers=HIDDEN_LAYERS, 
                             neurons=NEURONS, 
+                            conv_size=CONV_SIZE,
+                            conv_depth=CONV_DEPTH,
                             activation_function_hidden=ACTIVATION_FUNCTION_HIDDEN_LAYER,
                             activation_function_output=ACTIVATION_FUNCTION_OUTPUT_LAYER,
                             optimizer_algo=OPTIMIZER_ALGORITHM,
@@ -43,6 +47,8 @@ def main():
 
     #Training Once to set input sizes
     network_train(model, x_train_n, y_train_n, 1)
+
+    print(model.summary())
 
     #Create Folders to get to the MODEL_DIR
     dir_array = MODEL_DIR.split('/')

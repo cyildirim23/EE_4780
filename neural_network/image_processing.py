@@ -55,26 +55,22 @@ def cv_image_get_circles(cvImage: np.ndarray,
         return np.round(circles[0, :]).astype("int")
     return None
 
-def cv_filter_circles(circles: np.ndarray, small_bias: bool = True):
-    return_circles = []
-    for (x1, y1, r1) in circles:
-        discard_circle = False
-        for (x2, y2, r2) in circles:
-            if (x1, y1, r1) == (x2, y2, r2):
-                continue
-            dis = np.sqrt((x2-x1)**2 + (y2-y1)**2)
+def filter_circles(circles: np.ndarray, small_bias: bool = True) -> np.ndarray:
+    valid_circles = []
+    for x1, y1, r1 in circles:
+        valid = True
+        for x2, y2, r2 in circles:
+            dis = ((x2-x1)**2 + (y2-y1)**2)**0.5
             if dis < r1 + r2:
-                if small_bias:
-                    if r1 > r2:
-                        discard_circle = True
-                        break
-                else:
-                    if  r1 < r2:
-                        discard_circle = True
-                        break
-        if not discard_circle:
-            return_circles.append((x1, y1, r1))
-    return np.array(return_circles)
+                if r1 > r2 and small_bias:
+                    valid = False
+                    break
+                elif r1 < r2 and not small_bias:
+                    valid = False
+                    break
+        if valid:
+            valid_circles.append((x1, y1, r1))
+    return np.array(valid_circles)
     
 def cv_create_circle_images(cvImage: np.ndarray, 
                             circles: np.ndarray, 

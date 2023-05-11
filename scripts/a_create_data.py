@@ -6,10 +6,11 @@ import os
 from neural_network import *
 
 #Image Constants
-WIDTH = 1080
+WIDTH = 1280
 HEIGHT = 720
 FPS = 30
-UPDATE_RATIO = 16
+UPDATE_RATIO = 2
+
 CAM_PORT = 0
 IMAGE_WIDTH = 128
 IMAGE_HEIGHT = 128
@@ -229,6 +230,10 @@ def main():
                                         minRadius=MINRADIUS, 
                                         maxRadius=MAXRADIUS
             )
+
+            #Filter Circles
+            if circles is not None:
+                circles = filter_circles(circles, True)
 
             #Get Circle Images
             coin_circles, coin_images_nd, coin_images_py = cv_create_circle_images(gray_img, 

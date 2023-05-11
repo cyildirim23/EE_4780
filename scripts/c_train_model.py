@@ -3,8 +3,8 @@ import tensorflow as tf
 import time
 
 #Training Constants
-EPOCH_CHUNKS = 10
-ACCURACY_TARGET = 0.95
+EPOCH_CHUNKS = 50
+ACCURACY_TARGET = 0.99
 MAX_TESTS = 100
 MAX_TIME = None
 
